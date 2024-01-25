@@ -15,11 +15,11 @@ struct ContentView: View {
             TabView {
                 ManageAllResolutionsView()
                     .tabItem {
-                        Label("Today", systemImage: "star")
+                        Label("Today", systemImage: "checkmark.circle")
                     }
                 Text("challenge")
                     .tabItem {
-                        Label("One", systemImage: "star")
+                        Label("All", systemImage: "list.bullet.clipboard")
                     }
             }
         }

@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct AddResolutionView: View {
+    @Environment(\.modelContext) private var modelContext
     @Binding var category: String
     @State private var title: String = ""
-    // Other state variables as needed
-    var saveAction: (String, String) -> Void
+    
     @Environment(\.presentationMode) var presentationMode
     
 
@@ -21,7 +22,7 @@ struct AddResolutionView: View {
                 TextField("Resolution Title", text: $title)
                 // Additional fields
                 Button("Save") {
-                    saveAction(category, title)
+                    saveResolution(to: category, title: title)
                     presentationMode.wrappedValue.dismiss()
                 }
             }
@@ -32,9 +33,23 @@ struct AddResolutionView: View {
             })
         }
     }
+    
+    private func saveResolution(to category: String, title: String) {
+        let date = Date()
+        switch category {
+        case "Health":
+            modelContext.insert(Goal(timestamp: date, title: title, category: "health"))
+        case "Financial":
+            modelContext.insert(Goal(timestamp: date, title: title, category: "financial"))
+        case "Other":
+            modelContext.insert(Goal(timestamp: date, title: title, category: "general"))
+        default:
+            break
+        }
+    }
 }
 
 #Preview {
     @State var dummyCategory = "Health"
-    return AddResolutionView(category: $dummyCategory, saveAction: { _,_  in })
+    return AddResolutionView(category: $dummyCategory)
 }

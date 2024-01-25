@@ -19,12 +19,12 @@ final class Goal {
     var title: String
     var about: String
     var timestamp: Date
-    var type: String
+    var category: String
     
-    init(timestamp: Date, title: String = "", type: String = "general") {
+    init(timestamp: Date, title: String = "", category: String = "general") {
         self.timestamp = timestamp
         self.title = title
         self.about = ""
-        self.type = type
+        self.category = category
     }
 }
